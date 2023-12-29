@@ -1,0 +1,196 @@
+#include <iostream>
+#include <locale.h>
+#include <cmath>
+
+using namespace std;
+
+void geo33(); //Декларування функції типу void(задача geo33)
+
+void solve7();//Декларування функції типу void(задача Solve7)
+double factorial(int temp);
+
+void solve13();//Декларування функції типу void(задача Solve13)
+
+int main()
+{
+	setlocale(LC_ALL, "ukrainian");
+
+	int choice = 0; //Декларування змінної задля choice
+
+	while (choice != 4) {
+		setlocale(LC_ALL, "ukrainian");
+		cout.clear();
+		cout << "Виберiть яку з цих задач будете вирiшувати: "
+			"\n1. Geometry#33"
+			"\n2. Solve7"
+			"\n3. Solve13"
+			"\n4. Вийти з програми" << endl;
+
+
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+		{
+			// Geo33
+			geo33();
+			break;
+		}
+		case 2:
+		{
+			// Solve7
+			solve7();
+			break;
+		}
+		case 3:
+		{
+			// Solve13
+			solve13();
+			break;
+		}
+		case 4:
+		{
+			cout << "Програма завершена";
+			break;
+		}
+		default:
+		{
+			cout << "Такого варiанту немає\n";
+			break;
+		}
+		}
+	}
+}
+
+void geo33() { // Функція типу void, що не повертає значень
+	float x, y, r; // Декларування змінних типу float
+	bool ar1, ar2; // Декларування змінних типу bool
+	int n, count = 0;
+
+	cout << "Кількість разів: ";
+	cin >> n;
+
+	cout << "Уведiть радiус кола: ";
+	std::cin >> r;
+
+	for (int i = 1; i <= n; i++)
+	{
+
+		if (r > 0)
+		{
+			cout << "Уведiть точку за кординатою х : ";
+			cin >> x;
+			cout << "Уведiть точку за кординатою y : ";
+			cin >> y;
+
+
+			ar1 = x > -y + r * sqrt(2) && pow(x - r + sqrt(2), 2) + pow(y - r + sqrt(2), 2) < pow(r, 2) && x < y; //Рівняння першої фігури(верхньої)
+			ar2 = pow(x - r + sqrt(2), 2) + pow(y - r + sqrt(2), 2) > pow(r, 2) && x > 0 && y < 0 && x < y + r * sqrt(2); //Рівняння другої фігури(нижньої)
+
+			if (ar1 || ar2) {
+				count++;
+			}
+			else {
+
+			}
+
+		}
+		else {
+			cout << "Радіус не може бути від'ємним" << endl;
+		}
+	}
+	cout << "Кількість вдалих спроб: " << count << " з " << n;
+}
+
+void solve7()
+{
+	int k = 0, n;
+	const double pi = 3.14;
+	double x;
+
+	cout << "Введіть х: ";
+	cin >> x;
+
+	cout << "Обмеження n: ";
+	cin >> n;
+
+
+	long double sum = 0;
+
+	cout.precision(15);
+	if (!cin || n < 0)
+	{
+		cout << "Неправильне введення даних" << endl;
+	}
+	else
+	{
+		for (k; k <= n; k++)
+		{
+			int count = 0;
+
+			int buf = (3 * k - 2);
+
+			double part1 = factorial(buf);
+			double part2 = (5*n + 1);
+
+			double solving = pow(-1, k + 1) * (part1 / part2);
+
+			sum += solving;
+			solving = 0;
+
+			count = k % 3;
+
+			if (count == 2) {
+				cout << "Сума ряду: " << sum << endl;
+			}
+		}
+	}
+
+}
+
+double factorial(int temp)
+{
+	int equals = 1;
+	for (int i = 1; i <= temp; i++)
+	{
+		equals *= i;
+	}
+	return equals;
+}
+
+void solve13()
+{
+	int k = 0, n;
+	const double pi = 3.14, e = 1;
+	double x, g = 1E+7;
+
+
+	cout << "Введіть х: ";
+	cin >> x;
+
+	double sum = 0;
+	int buff = (2 * k - 1);
+
+	do
+	{
+		k++;
+		int count = 0;
+
+		double part1 = pow(2,k)*factorial(buff);
+		double part2 = sqrt(factorial(k));
+
+		double solving = part1 / part2;
+
+		cout << "Solve equals: " << solving << endl;
+
+		sum += solving;
+		solving = 0;
+
+		count = k % 3;
+
+		if (count == 2) {
+			cout << "Сума ряду: " << sum << endl;
+		}
+	} while (sum < g);
+}
